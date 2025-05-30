@@ -1,0 +1,21 @@
+{% extends "home/base.html" %}
+
+
+{% block title %}Main Page{% endblock %}
+
+
+
+{% block content %}
+  <h1>Welcome to My E-commerce Store!</h1>
+  <p>Explore our latest products and offers.</p>
+  <div class="product-list">
+    {% for product in products %}
+      <div class="product-item">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <button>Add to Cart</button>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

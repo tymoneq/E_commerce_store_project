@@ -1,0 +1,14 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{% block title %}MySite{% endblock %}</title>
+  <link rel="icon" href="{% static 'images/mainPage.png' %}" type="image/png">
+
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>
