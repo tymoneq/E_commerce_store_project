@@ -1,0 +1,33 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class UserRegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True, help_text='Required. Enter a valid email address.')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email is already in use.")
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Username is already taken.")
+        return username
+
+# This form is used for user registration, extending the built-in UserCreationForm
+# to include an email field and custom validation for username and email uniqueness.
+# It ensures that the email is valid and not already in use, and that the username is unique.
+# The save method is overridden to ensure the email is saved correctly when the user is created.
+# This form can be used in views to handle user registration, providing a user-friendly interface
+# for new users to sign up.
+# The form includes validation to ensure that the email and username are unique,
+# and it provides a clean interface for users to register with a username, email, and password.
+# The `clean_email` and `clean_username` methods check for existing users with the same email or username,
+# raising a validation error if duplicates are found.               

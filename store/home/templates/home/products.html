@@ -1,21 +1,26 @@
 {% extends "home/base.html" %}
 
 
-{% block title %}Main Page{% endblock %}
+{% block title %}Products Page{% endblock %}
 
 
 
 {% block content %}
-  <h1>Welcome to My E-commerce Store!</h1>
+  <div class="container mt-5 pt-3">
+  <h1 class ="mt-5">Welcome to Our E-commerce Store!</h1>
   <p>Explore our latest products and offers.</p>
   <div class="product-list">
     {% for product in products %}
       <div class="product-item">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
         <h2>{{ product.name }}</h2>
+        <p>Category: {{ product.category.name }}</p>
         <p>{{ product.description }}</p>
         <p>Price: ${{ product.price }}</p>
         <button>Add to Cart</button>
       </div>
     {% endfor %}
   </div>
+  </div>
+
 {% endblock %}
