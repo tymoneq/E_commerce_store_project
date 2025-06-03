@@ -7,7 +7,7 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email','first_name', 'last_name', 'password1', 'password2')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -15,11 +15,7 @@ class UserRegistrationForm(UserCreationForm):
             raise forms.ValidationError("Email is already in use.")
         return email
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("Username is already taken.")
-        return username
+
 
 # This form is used for user registration, extending the built-in UserCreationForm
 # to include an email field and custom validation for username and email uniqueness.

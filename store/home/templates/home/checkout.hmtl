@@ -1,0 +1,26 @@
+{% extends "home/base.html" %}
+
+
+{% block title %}Checkout Page{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <h1>Checkout Page</h1>
+    <p>Thank you for your order!</p>
+    <p>Your order has been placed successfully.</p>
+    <p>We will contact you soon with the details.</p>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Total Amount: {{ order.total_amount }}</p>
+    <p>Shipping Address: {{ order.shipping_address }}</p>
+    <p>Billing Address: {{ order.billing_address }}</p> 
+    <p>Payment Method: {{ order.payment_method }}</p>
+    <p>Order Status: {{ order.status }}</p>
+    <p>Order Date: {{ order.created_at }}</p>
+    <p>Thank you for shopping with us!</p>
+    <p>For any queries, please contact our support team.</p>
+    <p>We hope to see you again soon!</p>
+    <p>Best regards,</p>
+    <p>The Store Team</p>
+</div>
+{% endblock %}
