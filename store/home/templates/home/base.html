@@ -20,42 +20,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
+    <style>
+      .nav-item {
+        padding-left: 0.5rem; /* adjust as you want */
+        padding-right: 0.5rem;
+      }
+    </style>
+
     <!-- ✅ NAVIGATION BAR -->
-    <nav
-      class="navbar bg-dark border-bottom border-body fixed-top"
-      data-bs-theme="dark"
-    >
-      <ul class="container-fluid">
+    <nav class="navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
+      <ul class="nav  justify-content-end">
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'home' %}">Home</a>
+          <a class="nav-link active" href="{% url 'home' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'products' %}"
-            >Products</a
-          >
+          <a class="nav-link active" href="{% url 'products' %}">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'contact' %}"
-            >Contact</a
-          >
+          <a class="nav-link active" href="{% url 'contact' %}">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'about' %}"
-            >About us</a
-          >
+          <a class="nav-link active" href="{% url 'about' %}">About us</a>
         </li>
 
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'profile' %}"
-            >Profile</a
-          >
+          <a class="nav-link active" href="{% url 'profile' %}">Profile</a>
         </li>
         <form action="{% url 'logout' %}" method="post">
           {% csrf_token %}
           <button
             type="submit"
-            class="btn btn-link nav-link active text-info"
+            class="btn btn-link nav-link active"
             style="text-decoration: none"
           >
             Logout
@@ -64,24 +60,19 @@
 
         {% else %}
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'login' %}"
-            >Login</a
-          >
+          <a class="nav-link active" href="{% url 'login' %}">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'register' %}"
-            >Register</a
-          >
+          <a class="nav-link active" href="{% url 'register' %}">Register</a>
         </li>
         {% endif %}
 
         <li class="nav-item">
-          <a class="nav-link active text-info" href="{% url 'view_cart' %}"
-            >Cart</a
-          >
+          <a class="nav-link active" href="{% url 'view_cart' %}">Cart</a>
         </li>
       </ul>
     </nav>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
