@@ -1,29 +1,51 @@
-{% extends "home/base.html" %}
-
-
-{% block title %}Products Page{% endblock %}
-
-
+{% extends "home/base.html" %} {% block title %}Products Page{% endblock %} 
 
 {% block content %}
-  <div class="container mt-5 pt-3">
-  <h1 class ="mt-5">Welcome to Our E-commerce Store!</h1>
+<div class="container mt-5 pt-3">
+  <h1 class="mt-5">Welcome to Our E-commerce Store!</h1>
   <p>Explore our latest products and offers.</p>
-  <div class="product-list">
-    {% for product in products %}
-      <div class="product-item">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
-        <h2>{{ product.name }}</h2>
-        <p>Category: {{ product.category.name }}</p>
-        <p>{{ product.description }}</p>
-        <p>Price: ${{ product.price }}</p>
-        <form method="post" action="{% url 'add_to_cart' product.id %}">
-          {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
-        </form>
-      </div>
-    {% endfor %}
-  </div>
+
+  <div>
+    <form method="get" class="mb-4">
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
   </div>
 
+  <div class="container mt-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      {% for product in products %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img
+            src="{{ product.image.url }}"
+            class="card-img-top"
+            alt="{{ product.name }}"
+          />
+          <div class="card-body">
+            <h2 class="card-title">{{ product.name }}</h2>
+            <p class="card-title">Category: {{ product.category }}</p>
+            <p class="card-title">Brand: {{ product.brand }}</p>
+            <p class="card-title">{{ product.description }}</p>
+            <p class="card-title">Price: ${{ product.price }}</p>
+
+            {% comment %}
+            <a
+              href="{% url 'product_detail' product.id %}"
+              class="btn btn-primary"
+              >View Details</a
+            >
+            {% endcomment %}
+
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}

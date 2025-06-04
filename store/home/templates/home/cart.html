@@ -1,40 +1,46 @@
-{% extends "home/base.html" %}
-
-
-{% block title %}Cart Page{% endblock %}
+{% extends "home/base.html" %} {% block title %}Cart Page{% endblock %} 
 
 {% block content %}
+
 <div class="container mt-5 pt-3">
-    <h1 class="mt-5">Your Cart</h1> 
+  <h1 class="mt-5">Your Cart</h1>
 
-    
-    {% if cart_items %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in cart_items %}
-        <tr>
-            <td>{{ item.product.name }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>${{ item.product.price }}</td>
-            <td>${{ item.subtotal }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+  {% if cart_items %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.product.price }}</td>
+        <td>${{ item.subtotal }}</td>
+        <td>
+          <form method="post" action="{% url 'remove_from_cart' item.product.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">
+              Remove 🗑
+            </button>
+          </form>
+        </td>
+      </tr>
 
-    <h4>Total: ${{ total_price }}</h4>
-    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    {% else %}
-    <p>Your cart is empty.</p>
-    {% endif %}
+  <h4>Total: ${{ total_price }}</h4>
+  <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
 
+  {% else %}
+  <p>Your cart is empty.</p>
+  {% endif %}
+</div>
 {% endblock %}
